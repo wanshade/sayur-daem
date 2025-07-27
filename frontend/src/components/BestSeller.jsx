@@ -11,14 +11,17 @@ const BestSeller = () => {
   // Responsive items per slide
   useEffect(() => {
     const updateItemsToShow = () => {
-      if (window.innerWidth < 768) {
-        // sm breakpoint
+      if (window.innerWidth < 640) {
+        // sm breakpoint - show 1 item on very small screens
+        setItemsToShow(1);
+      } else if (window.innerWidth < 768) {
+        // md breakpoint - show 2 items on small screens
         setItemsToShow(2);
       } else if (window.innerWidth < 1024) {
-        // md breakpoint
+        // lg breakpoint - show 3 items on medium screens
         setItemsToShow(3);
       } else {
-        // lg breakpoint and above
+        // xl breakpoint and above - show 4 items on large screens
         setItemsToShow(4);
       }
     };
@@ -46,6 +49,7 @@ const BestSeller = () => {
   };
 
   const getItemWidth = () => {
+    if (itemsToShow === 1) return "w-full";
     if (itemsToShow === 2) return "w-1/2";
     if (itemsToShow === 3) return "w-1/3";
     return "w-1/4";
@@ -90,13 +94,20 @@ const BestSeller = () => {
           }}
         >
           {Array.from({ length: totalSlides }).map((_, slideIndex) => (
-            <div key={slideIndex} className="w-full flex-shrink-0 flex">
+            <div
+              key={slideIndex}
+              className={`w-full flex-shrink-0 flex ${
+                itemsToShow === 1 || itemsToShow === 2 ? "justify-center" : ""
+              }`}
+            >
               {bestSellerProducts
                 .slice(slideIndex * itemsToShow, (slideIndex + 1) * itemsToShow)
                 .map((product, index) => (
                   <div
                     key={index}
-                    className={`${getItemWidth()} flex-shrink-0 px-2`}
+                    className={`${getItemWidth()} flex-shrink-0 px-2 ${
+                      itemsToShow === 1 ? "max-w-sm mx-auto" : ""
+                    }`}
                   >
                     <ProductCard product={product} />
                   </div>
