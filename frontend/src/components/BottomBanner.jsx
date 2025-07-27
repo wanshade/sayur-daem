@@ -19,7 +19,7 @@ const BottomBanner = () => {
       />
 
       {/* Content overlay */}
-      <div className="absolute inset-0 flex flex-col items-center md:items-end md:justify-center pt-16 md:pt-0 md:pr-24">
+      <div className="absolute inset-0 flex flex-col items-center md:items-end md:justify-center pt-0 md:pr-24">
         <div>
           <h1 className="text-2xl md:text-3xl font-semibold text-primary mb-6">
             Kenapa Pilih Kami?
